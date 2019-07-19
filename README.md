@@ -36,6 +36,7 @@ In addition to those above, this shortcode receives other parameters:
 - `root_term_class`: The CSS class that will wrap every root term title. If not passed, will fallback to `term_class`.
 - `children_number`: Number of terms to show on nested terms. If not passed, will fallback to `number` used by `get_terms`. If not passed as well, will show all.
 - `see_more_text`: The text to link to the parent term, in case that not all the child terms were presented. If not passed, the link will not be rendered.
+- `tree_depth`: The depth of the taxonomy tree. For example, if depth is 1, it will render until the first child level, but not the grandchild level. If not passed, it will render all levels.
 
 ## Default parameters
 ```php

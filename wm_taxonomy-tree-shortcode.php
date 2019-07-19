@@ -70,6 +70,10 @@ function renderContainer($html, $config) {
 }
 
 function createTaxonomyTree($terms, $config, $level = 0) {
+  if (isset($config['tree_depth']) && $level > $config['tree_depth']) {
+    return [];
+  }
+
   return array_map(
     function($term) use ($config, $level) {
       $childrenConfig = [
