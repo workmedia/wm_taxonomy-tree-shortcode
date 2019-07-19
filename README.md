@@ -26,7 +26,9 @@ You can use it in pages, posts or any place that accepts a shortcode.
 
 ## Parameters
 
-All parameters from [wp_term_query](https://developer.wordpress.org/reference/classes/wp_term_query/__construct/) are accepted by this shortcode and will be passed to Wordpress function `get_terms`. E.g.: `number`, `parent`, `hide_empty`, etc. 
+All parameters from [wp_term_query](https://developer.wordpress.org/reference/classes/wp_term_query/__construct/) are accepted by this shortcode and will be passed to Wordpress function `get_terms`. E.g.: `number`, `parent`, `hide_empty`, `taxonomy` etc.
+
+> NOTE: If no taxonomy is set, it will fallback to `category`.
 
 In addition to those above, this shortcode receives other parameters:
 - `term_element`: The html element that will wrap every term title. Default: `span`.
