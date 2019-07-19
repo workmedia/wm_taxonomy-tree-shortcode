@@ -1,9 +1,11 @@
 <?php
 /**
  * Plugin Name: WM Taxonomy Tree Shortcode
+ * Plugin URI: https://github.com/workmedia/wm_taxonomy-tree-shortcode
  * Description: Render a taxonomy tree in place of a shortcode
- * Version: 0.1
+ * Version: 0.1.0
  * Author: Workmedia
+ * Author URI: https://workmedia.pt
  */
 
 function renderTitle($content, $level, $config) {
