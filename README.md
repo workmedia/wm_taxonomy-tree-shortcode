@@ -2,6 +2,8 @@
 
 This is a Wordpress plugin that lets you render a taxonomy tree using a shortcode.
 
+![Expected result](result.jpg)
+
 ## Example of usage
 
 You can use it in pages, posts or any place that accepts a shortcode.
