@@ -150,7 +150,7 @@ add_action('rest_api_init', function() {
 		'methods' => 'GET',
 		'callback' => function($request) {
       $args = array_reduce(
-        ['tree_depth', 'number', 'orderby', 'order', 'children_number', 'taxonomy'],
+        ['tree_depth', 'number', 'orderby', 'order', 'children_number', 'taxonomy', 'parent'],
         function($args, $param) use($request) {
           if ($request->get_param($param)) {
             $args[$param] = $request->get_param($param);
