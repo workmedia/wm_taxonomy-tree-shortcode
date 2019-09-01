@@ -1,0 +1,12 @@
+{
+    "name": "workmedia/wm_taxonomy-tree",
+    "description": "Provides a taxonomy-tree shortcode and a REST endpoint",
+    "type": "wordpresplugin",
+    "authors": [
+        {
+            "name": "Matheus Paiva",
+            "email": "mpaiva@workmedia.pt"
+        }
+    ],
+    "require": {}
+}
