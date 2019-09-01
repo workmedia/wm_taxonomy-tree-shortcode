@@ -1,7 +1,7 @@
 {
     "name": "workmedia/wm_taxonomy-tree",
     "description": "Provides a taxonomy-tree shortcode and a REST endpoint",
-    "type": "wordpresplugin",
+    "type": "wordpress-plugin",
     "authors": [
         {
             "name": "Matheus Paiva",
