@@ -13,7 +13,7 @@ function renderTitle($content, $level, $config) {
     ? (isset($config['root_term_element']) ? $config['root_term_element'] : $config['term_element'])
     : $config['term_element'];
 
-  $termClass = ($level === 0) 
+  $termClass = ($level === 0)
     ? (isset($config['root_term_class']) ? $config['root_term_class'] : $config['term_class'])
     : $config['term_class'];
 
@@ -44,8 +44,8 @@ function renderTaxonomyTerms($taxonomyTree, $config) {
 
       return "$str
         <li
-          class=\"taxonomy-term\" 
-          id=\"taxonomy-term-$term->term_id\" 
+          class=\"taxonomy-term\"
+          id=\"taxonomy-term-$term->term_id\"
           data-level=\"$term->level\"
         >
           $title
@@ -86,10 +86,10 @@ function createTaxonomyTree($terms, $config, $level = 0) {
       return (object) array_merge(
         (array) $term,
         [
-          'children' => createTaxonomyTree($children, $config, $level + 1),
+          'children' => array_values(createTaxonomyTree($children, $config, $level + 1)),
           'link' => get_term_link($term),
           'level' => $level,
-          'totalCount' => count(get_term_children( $term->term_id, $config['taxonomy']))
+          'totalCount' => count(get_term_children($term->term_id, $config['taxonomy']))
         ]
       );
     },
@@ -114,7 +114,7 @@ function sanitizeAtts($atts) {
 
   foreach ($atts as $k => $v) {
     $key = wp_strip_all_tags($k);
-    
+
     if ($key) {
       $sanitezed_atts[$key] = wp_strip_all_tags($v);
     }
@@ -127,11 +127,11 @@ add_shortcode('wm_taxonomy-tree', function($atts) {
   try {
     $atts = sanitizeAtts($atts);
     $terms = get_terms($atts);
-  
+
     if (is_object($terms) && $terms->errors) {
       return '';
     }
-  
+
     $taxonomyTree = createTaxonomyTree($terms, $atts);
     $taxonomyHtml = renderTaxonomyTerms($taxonomyTree, $atts);
 
@@ -143,4 +143,32 @@ add_shortcode('wm_taxonomy-tree', function($atts) {
 
     return '';
   }
+});
+
+add_action('rest_api_init', function() {
+  register_rest_route('workmedia/v1', '/taxonomy-tree', [
+		'methods' => 'GET',
+		'callback' => function($request) {
+      $args = array_reduce(
+        ['tree_depth', 'number', 'orderby', 'order', 'children_number', 'taxonomy'],
+        function($args, $param) use($request) {
+          if ($request->get_param($param)) {
+            $args[$param] = $request->get_param($param);
+          }
+
+          return $args;
+        },
+        []
+      );
+
+      $atts = sanitizeAtts($args);
+      $terms = get_terms($atts);
+
+      if (is_object($terms) && $terms->errors) {
+        return null;
+      }
+
+      return createTaxonomyTree($terms, $atts);
+		},
+	]);
 });
