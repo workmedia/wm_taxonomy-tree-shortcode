@@ -165,10 +165,10 @@ add_action('rest_api_init', function() {
       $terms = get_terms($atts);
 
       if (is_object($terms) && $terms->errors) {
-        return null;
+        return [];
       }
 
-      return createTaxonomyTree($terms, $atts);
+      return array_values(createTaxonomyTree($terms, $atts));
 		},
 	]);
 });
