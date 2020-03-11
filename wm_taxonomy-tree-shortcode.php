@@ -164,6 +164,10 @@ add_action('rest_api_init', function() {
       $atts = sanitizeAtts($args);
       $terms = get_terms($atts);
 
+      foreach ($terms as $term) {
+        $term->icon = carbon_get_term_meta($term->term_id, 'icon');
+      }
+
       if (is_object($terms) && $terms->errors) {
         return [];
       }
